@@ -7,6 +7,7 @@ import CreatePost from "./pages/CreatePost";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import Footer from "./layout/Footer";
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home user={user}/>
             </Route>
             <Route exact path="/user/login">
               <Login onLogin={(userData) => setUser(userData)} />
@@ -32,6 +33,7 @@ function App() {
             </Route>
           </Switch>
         </div>
+          <Footer />
       </div>
     </Router>
   );
