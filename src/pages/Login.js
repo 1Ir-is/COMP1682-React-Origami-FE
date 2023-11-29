@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { userAPI } from "../api/api";
+import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -16,24 +17,28 @@ const Login = () => {
     });
   };
 
-  const handleLogin = async (e) => {
+  const history = useHistory();
+
+const handleLogin = async (e) => {
     e.preventDefault();
     console.log(formData);
     try {
-      // Assuming userAPI.login() returns a promise
-      const response = await userAPI.loginUser({
-        username: formData.username,
-        password: formData.password,
-      });
-      console.log(response);
-      // Login successful
-      setMessage("Login successful");
+        // Assuming userAPI.login() returns a promise
+        const response = await userAPI.loginUser({
+            username: formData.username,
+            password: formData.password,
+        });
+        console.log(response);
+        // Login successful
+        alert("Login successful!");
+        onLogin(response.data); // Pass the user data to the parent component
+        history.push("/"); // Replace '/' with the actual route to your home page
     } catch (error) {
-      // Login failed
-      console.error(error);
-      setMessage("Login failed. Please check your username and password.");
+        // Login failed
+        console.error(error);
+        alert("Login failed. Please try again.");
     }
-  };
+};
 
   return (
     <div className="container">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { origamiAPI } from "../api/api";
+import { useHistory } from "react-router-dom";
 
 const CreatePost = () => {
   const [description, setDescription] = useState("");
@@ -9,6 +10,8 @@ const CreatePost = () => {
     setDescription(e.target.value);
   };
 
+  const history = useHistory();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -17,11 +20,12 @@ const CreatePost = () => {
       await origamiAPI.createOrigami({ description });
 
       // Post creation successful
-      setMessage("Post created successfully");
+      alert("Post created successfully");
       setDescription(""); // Clear the description field after successful submission
+      history.push("/"); // Replace '/' with the actual route to your home page  
     } catch (error) {
       // Post creation failed
-      setMessage("Failed to create post. Please try again.");
+      alert("Failed to create post. Please try again.");
     }
   };
 

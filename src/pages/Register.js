@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { userAPI } from "../api/api";
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -32,15 +33,19 @@ const Register = () => {
     }
   };
 
+  const history = useHistory();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation: Check if password and re-password match
     if (formData.password !== formData.rePassword) {
-      setMessage("Passwords do not match");
+        setMessage("Passwords do not match");
     } else {
-      // Passwords match, send data to the API
-      await postData();
+        // Passwords match, send data to the API
+        await postData();
+        alert("Registration successful!");
+        history.push("/user/login"); // Replace '/' with the actual route to your home page
     }
   };
 
