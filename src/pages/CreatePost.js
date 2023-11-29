@@ -27,7 +27,9 @@ const CreatePost = () => {
 
   return (
     <div className="container">
-      <h2 className="text-center">Create a New Post</h2>
+      <div className="my-2">
+        <h2 className="text-dark text-center">Create a New Post</h2>
+      </div>
       {message && (
         <div
           className={
@@ -39,20 +41,21 @@ const CreatePost = () => {
           {message}
         </div>
       )}
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="postContent">Post Content</label>
           <textarea
-            name="description"
+            name="postContent"
             value={description}
             onChange={handleChange}
-            className="form-control"
+            className
+            id="postContent"
             rows="4"
-            required
-          />
+            placeholder="Write your post here..."
+          ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Create Post
+        <button type="submit" className="btn btn-primary btn-block mt-2">
+          Post
         </button>
       </form>
     </div>
