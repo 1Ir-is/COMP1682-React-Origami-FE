@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import origamiReducer from "./origamiReducer";
 import { userAPI } from "../api/api";
 import { LOGIN_USER, LOGOUT_USER } from "./types";
@@ -10,7 +10,15 @@ const OrigamiState = (props) => {
         user: null
     }
 
-    const [state, dispatch] = useReducer(origamiReducer, initialState);
+    const [state, dispatch] = useReducer(origamiReducer, initialState, () => {
+        const localState = localStorage.getItem("origami");
+        return localState ? JSON.parse(localState) : initialState;
+    });
+
+    useEffect(() => {
+        localStorage.setItem("origami", JSON.stringify(state));
+    });
+
 
     const loginUser = async (formData ) => {
         console.log(formData);

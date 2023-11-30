@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { userAPI } from "../api/api";
+import React, { useContext, useEffect, useState } from "react";
+import { origamiAPI, userAPI } from "../api/api";
 import { useHistory } from "react-router-dom";
 import OrigamiContext from "../context/origamiContext";
 
@@ -10,6 +10,12 @@ const Login = () => {
     username: "",
     password: "",
   });
+
+  useEffect(async() => {
+    const response = await origamiAPI.getMyOrigami();
+    console.log(response);
+  },[])
+
 
   const [message, setMessage] = useState("");
 
