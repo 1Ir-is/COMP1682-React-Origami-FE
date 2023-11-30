@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import OrigamiContext from "../context/origamiContext";
 
-const Navbar = ({ user }) => {
+const Navbar = () => {
+    const origamiContext = useContext(OrigamiContext);
+    const {user} = origamiContext;
+    console.log(user);
     return (
         <div className="navbar bg-primary">
             <Link to="/">

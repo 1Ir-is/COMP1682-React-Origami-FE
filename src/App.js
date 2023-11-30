@@ -8,22 +8,25 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Footer from "./layout/Footer";
+import OrigamiState from "./context/origamiState";
 
 function App() {
 
-  const [user, setUser] = useState(null);
 
+
+ 
   return (
+    <OrigamiState>
     <Router>
       <div className="App">
-       <Navbar user={user} />
+       <Navbar />
         <div className="container">
           <Switch>
             <Route exact path="/">
-              <Home user={user}/>
+              <Home/>
             </Route>
             <Route exact path="/user/login">
-              <Login onLogin={(userData) => setUser(userData)} />
+              <Login />
             </Route>
             <Route exact path="/user/register">
               <Register />
@@ -33,9 +36,12 @@ function App() {
             </Route>
           </Switch>
         </div>
+        <div className="footer">
           <Footer />
+        </div>
       </div>
     </Router>
+    </OrigamiState>
   );
 }
 

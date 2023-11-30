@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { origamiAPI } from "../api/api";
+import origamiContext from "../context/origamiContext";
 
-const Home = ({ user }) => {
+const Home = () => {
+    const context = useContext(origamiContext)
+    const {user, logoutUser} = context;
     const [origamiData, setOrigamiData] = useState([]);
 
     useEffect(() => {
@@ -22,6 +25,11 @@ const Home = ({ user }) => {
                         <p className="text-primary">{origami.description}</p>
                         </div>
                     ))}
+                    <div>
+                        <button 
+                            onClick={logoutUser}
+                        className="btn btn-dark btn-block">Logout</button>"
+                        </div>
                 </div>
             ) : (
                 // Render something else if the user is not logged in
